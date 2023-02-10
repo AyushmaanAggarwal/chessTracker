@@ -25,7 +25,7 @@ def add_player():
         elif len(playername) == 0:
             flash("Please add a name.", category='error')
         else:
-            new_player = Players(name=playername, ranking=1500, gamesplayed=0, gamesIds=0, rankingHistory=0)
+            new_player = Players(name=playername, ranking=2000, gamesplayed=0, gamesIds=0, rankingHistory=0)
             db.session.add(new_player)
             db.session.commit()
             flash("New Loth Master created!", category='success')
@@ -86,6 +86,8 @@ def add_game():
                          player2=player2.name, player2elo=player2.ranking, player2elodelta=delta2, winner=winner)
         player1.ranking += delta1
         player2.ranking += delta2
+        player1.gamesplayed += 1
+        player2.gamesplayed += 1
         #player1.rankingHistory.append(player1.ranking)
         #player2.rankingHistory.append(player2.ranking)
         #player1.gamesIds.append(new_game.id)
