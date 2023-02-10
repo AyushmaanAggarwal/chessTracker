@@ -15,24 +15,28 @@
         <option value="Bullet 1+1">Bullet 1min+1sec</option>
         <option value="Bullet 1">Bullet 1min</option>
     </select>
+    <br>
     <select name="player1" class="form-select" aria-label="Player 1">
         <option selected>Player 1</option>
         {% for player in players %}
         <option value="{{ player.fullName }}">{{ player.name }}</option>
         {% endfor %}
     </select>
+    <br>
     <select name="player2" class="form-select" aria-label="Player 2">
         <option selected>Player 2</option>
         {% for player in players %}
         <option value="{{ player.fullName }}">{{ player.name }}</option>
         {% endfor %}
     </select>
+    <br>
     <select name="winner" class="form-select" aria-label="Winning Player">
         <option selected>Loth Master</option>
         <option value="1 - 0">Player 1</option>
         <option value="0 - 1">Player 2</option>
         <option value="½ - ½">Tie</option>
     </select>
+    <br>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
 {% endblock %}
