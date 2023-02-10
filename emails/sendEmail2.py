@@ -18,11 +18,7 @@ def gmail_send_message(to_address, from_address, subject, message_text):
 
     context = ssl.create_default_context()
 
-    try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-            smtp.login(from_address, email_password)
-            smtp.sendmail(from_address, to_address, em.as_string())
-        return "Email Sent!"
-    except:
-        return "Email failed to send"
-    
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(from_address, email_password)
+        smtp.sendmail(from_address, to_address, em.as_string())
+    return "Email Sent!"
