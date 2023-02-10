@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}LM{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="card p-4 p-md-5 mb-4 rounded text-bg-dark">
+  <h1>Welcome to the Loth Chess Club</h1>
+  <p class="lead my-3">Here, you can post any events that you think might interest others. You could
+   also plan get togethers and study sessions!</p>
+</div>
+<br>
+
+<h1 align="center">Games</h1>
+<div class="table-responsive">
+    <table class="table lowz">
+        <thead class="thead-dark">
+        <tr>
+            <th class="col-2" scope="col">Format</th>
+            <th class="col-2" scope="col">Player 1</th>
+            <th class="col-2" scope="col">Loth Elo</th>
+            <th class="col-2" scope="col">Player 2</th>
+            <th class="col-2" scope="col">Loth Elo</th>
+            <th class="col-2" scope="col">Winner</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+        <tr class="align-items-center">
+            <td class="col-2">{{ game.type }}</td>
+            <td class="col-2">{{ game.player1 }}</td>
+            <td class="col-2">{{ game.player1elo }}
+                {% if game.player1elodelta >= 0 %}
+                    <p style='color:MediumSeaGreen'> {{ game.player1elodelta }}</p>
+                {% else %}
+                    <p style='color:Tomato'> {{ game.player1elodelta }}</p>
+                {% endif %}
+            </td>
+            <td class="col-2">{{ game.player2 }}</td>
+            <td class="col-2">{{ game.player2elo }}
+                {% if game.player2elodelta >= 0 %}
+                    <p style='color:MediumSeaGreen'> {{ game.player2elodelta }}</p>
+                {% else %}
+                    <p style='color:Tomato'> {{ game.player2elodelta }}</p>
+                {% endif %}
+            </td>
+            <td class="col-2">{{ game.winner }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="fixed">
+<a href="/add-game">
+    <button class="btn btn-outline-secondary whitebg">Add Game</button>
+</a>
+</div>
+{% endblock %}

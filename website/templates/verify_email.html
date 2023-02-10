@@ -1,0 +1,17 @@
+{% extends "emailPasswordForm.html" %}
+{% block title %}Verify{% endblock %}
+{% block pageTitle %}Verify your email address{% endblock %}
+{% block extraContent %}
+<div class="form-group">
+  <label for="verifyCode">Verification Code</label>
+  <input
+    type="text"
+    class="form-control"
+    id="verifyCode"
+    name="verifyCode"
+    placeholder="Enter Verification Code"
+  />
+</div>
+<a href="/resend-verification-code">Resend Verification Code</a>
+{% endblock %}
+{% block submitButton %}Verify Email{% endblock %}

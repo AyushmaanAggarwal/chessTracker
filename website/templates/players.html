@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}LM{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="card p-4 p-md-5 mb-4 rounded text-bg-dark">
+  <h1>Welcome to the Loth Chess Club</h1>
+  <p class="lead my-3">Here, you can post any events that you think might interest others. You could
+   also plan get togethers and study sessions!</p>
+</div>
+<br>
+
+<h1 align="center">Loth Masters</h1>
+<div class="table-responsive">
+    <table class="table lowz">
+        <thead class="thead-dark">
+        <tr>
+            <th class="col-2" scope="col">Name</th>
+            <th class="col-2" scope="col">Current Ranking</th>
+            <th class="col-2" scope="col">Games Played</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+        <tr class="align-items-center">
+            <th class="col-2">{{ player.fullName }}</th>
+            <th class="col-2">{{ player.ranking }}</th>
+            <th class="col-2">{{ player.gamesplayed }}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="fixed">
+<a href="/add-player">
+    <button class="btn btn-outline-secondary whitebg">Add LM</button>
+</a>
+</div>
+{% endblock %}

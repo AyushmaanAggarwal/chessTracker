@@ -1,0 +1,13 @@
+table.lowz {
+    z-index: 500;
+}
+ div.fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+button.whitebg {
+    background-color: #ffffff;
+}
