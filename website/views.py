@@ -55,11 +55,11 @@ def computeElo(player1, player2, winner, type):
         delta2 = 1 - E2
 
     k = 16
-    if type.contains("Classic"):
+    if "Classic" in type:
         k *= 2
-    elif type.contains("Rapid"):
+    elif "Rapid" in type:
         k *= 1.5
-    elif type.contains("Bullet"):
+    elif "Bullet" in type:
         k *= 1.25
 
     deltaElo1 = np.round(delta1*k)
