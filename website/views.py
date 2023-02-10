@@ -8,7 +8,6 @@ import json
 views = Blueprint('views', __name__)
 
 @views.route('/')
-@login_required
 def home():
     players_lst = Players.query.order_by(Players.ranking.desc()).all()
     return render_template("players.html", players=players_lst, user=current_user)
@@ -33,7 +32,6 @@ def add_player():
     return render_template("new_player.html", user=current_user)
 
 @views.route('/games')
-@login_required
 def game():
     games_lst = Games.query.all()
     return render_template("games.html", games=games_lst, user=current_user)
