@@ -15,14 +15,14 @@ class User(db.Model, UserMixin):
     testlevel = db.Column(db.String(10))
 
 class Players(db.Model):
-    name = db.Column(db.String(), primary_key=True)
+    name = db.Column(db.String(), unique=True)
     ranking = db.Column(db.Integer())
     gamesplayed = db.Column(db.Integer())
     gamesIds = db.Column(db.String())
     rankingHistory = db.Column(db.Integer())
 
 class Games(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, unique=True)
     type = db.Column(db.String())
     player1 = db.Column(db.String(150))
     player1elo = db.Column(db.Integer())
