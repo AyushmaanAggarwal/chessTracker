@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 
 def gmail_send_message(to_address, from_address, subject, message_text):
 
-    with open("../instance/pythonpass", 'r') as file:
+    with open("instance/pythonpass", 'r') as file:
         email_password = file.read()
 
     em = MIMEMultipart('alternative')
