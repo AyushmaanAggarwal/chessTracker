@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     testlevel = db.Column(db.String(10))
 
 class Players(db.Model):
-    fullName = db.Column(db.String(), primary_key=True)
+    name = db.Column(db.String(), primary_key=True)
     ranking = db.Column(db.Integer())
     gamesplayed = db.Column(db.Integer())
     gamesIds = db.Column(db.String())

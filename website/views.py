@@ -19,13 +19,13 @@ def add_player():
     if request.method == 'POST':
         playername = request.form.get('playerName')
 
-        existingPlayer = Players.query.filter_by(fullName=playername).first()
+        existingPlayer = Players.query.filter_by(name=playername).first()
         if existingPlayer:
             flash("Player already exists.", category='error')
         elif len(playername) == 0:
             flash("Please add a name.", category='error')
         else:
-            new_player = Players(fullName=playername, ranking=1500, gamesplayed=0, gamesIds=0, rankingHistory=0)
+            new_player = Players(name=playername, ranking=1500, gamesplayed=0, gamesIds=0, rankingHistory=0)
             db.session.add(new_player)
             db.session.commit()
             flash("New Loth Master created!", category='success')
@@ -78,12 +78,12 @@ def add_game():
         player2 = request.form.get('player2')
         winner = request.form.get('winner')
 
-        player1 = Players.query.filter_by(fullName=player1).first()
-        player2 = Players.query.filter_by(fullName=player2).first()
+        player1 = Players.query.filter_by(name=player1).first()
+        player2 = Players.query.filter_by(name=player2).first()
 
         delta1, delta2 = computeElo(player1, player2, winner, type)
-        new_game = Games(type=type, player1=player1.fullName, player1elo=player1.ranking, player1elodelta=delta1,
-                         player2=player2.fullName, player2elo=player2.ranking, player2elodelta=delta2, winner=winner)
+        new_game = Games(type=type, player1=player1.name, player1elo=player1.ranking, player1elodelta=delta1,
+                         player2=player2.name, player2elo=player2.ranking, player2elodelta=delta2, winner=winner)
         player1.ranking += delta1
         player2.ranking += delta2
         #player1.rankingHistory.append(player1.ranking)
