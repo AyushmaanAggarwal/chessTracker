@@ -19,7 +19,7 @@
     <select name="player1" class="form-select" aria-label="Player 1">
         <option selected>Player 1</option>
         {% for player in players %}
-        <option value="{{ player.fullName }}">{{ player.name }}</option>
+        <option value="{{ player.name }}">{{ player.name }}</option>
         {% endfor %}
     </select>
     <br>
