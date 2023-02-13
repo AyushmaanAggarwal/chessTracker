@@ -3,6 +3,8 @@
 
 {% block content %}
 <form method="POST">
+  <div class="card bg-body-secondary" style="--bs-bg-opacity: .75;">
+  <div class="card-body">
     <h1 align="center">Enter New Game</h1>
     <select name="format" class="form-select" aria-label="Game Format">
         <option selected>Game Format</option>
@@ -38,5 +40,7 @@
     </select>
     <br>
     <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+    </div>
 </form>
 {% endblock %}

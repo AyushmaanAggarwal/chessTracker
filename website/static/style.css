@@ -11,3 +11,10 @@ table.lowz {
 button.whitebg {
     background-color: #ffffff;
 }
+
+body.bg_pic {
+    background-image: url('chess_bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
