@@ -11,17 +11,19 @@
     <table class="table lowz">
         <thead class="thead-dark">
         <tr>
+            <th class="col-2" scope="col">Date</th>
             <th class="col-2" scope="col">Format</th>
             <th class="col-2" scope="col">Player 1</th>
-            <th class="col-2" scope="col">Loth Elo</th>
+            <th class="col-1" scope="col">Loth Elo</th>
             <th class="col-2" scope="col">Player 2</th>
-            <th class="col-2" scope="col">Loth Elo</th>
+            <th class="col-1" scope="col">Loth Elo</th>
             <th class="col-2" scope="col">Winner</th>
         </tr>
         </thead>
         <tbody>
         {% for game in games %}
         <tr class="align-items-center">
+            <td class="col-2">{{ game.date.date().strftime("%B %d, %Y") }}</td>
             <td class="col-2">{{ game.type }}</td>
             <td class="col-2">{{ game.player1 }}</td>
             <td class="col-2">{{ game.player1elo }}

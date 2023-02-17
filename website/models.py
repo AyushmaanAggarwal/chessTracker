@@ -24,6 +24,7 @@ class Players(db.Model):
 
 class Games(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime())
     type = db.Column(db.String())
     player1 = db.Column(db.String(150))
     player1elo = db.Column(db.Integer())

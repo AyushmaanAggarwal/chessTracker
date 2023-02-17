@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from .models import Players, Games
@@ -33,7 +35,7 @@ def add_player():
 
 @views.route('/games')
 def game():
-    games_lst = Games.query.all()
+    games_lst = Games.query.order_by(Games.date.desc()).all()
     return render_template("games.html", games=games_lst, user=current_user)
 def expected_score(elo1, elo2):
     return 1/(1 + 10**((elo2 - elo1)/400))
@@ -75,23 +77,29 @@ def add_game():
         player1 = request.form.get('player1')
         player2 = request.form.get('player2')
         winner = request.form.get('winner')
+        if type=="invalid":
+            flash("Please select a type of game (Classic means no time limit)", category="error")
+        elif player1=="invalid" or player2=="invalid":
+            flash("Select both players before continuing", category="error")
+        elif winner=="invalid":
+            flash("Please select a winner", category="error")
+        else:
+            player1 = Players.query.filter_by(name=player1).first()
+            player2 = Players.query.filter_by(name=player2).first()
 
-        player1 = Players.query.filter_by(name=player1).first()
-        player2 = Players.query.filter_by(name=player2).first()
-
-        delta1, delta2 = computeElo(player1, player2, winner, type)
-        new_game = Games(type=type, player1=player1.name, player1elo=player1.ranking, player1elodelta=delta1,
-                         player2=player2.name, player2elo=player2.ranking, player2elodelta=delta2, winner=winner)
-        player1.ranking += delta1
-        player2.ranking += delta2
-        player1.gamesplayed += 1
-        player2.gamesplayed += 1
-        #player1.rankingHistory.append(player1.ranking)
-        #player2.rankingHistory.append(player2.ranking)
-        #player1.gamesIds.append(new_game.id)
-        #player2.gamesIds.append(new_game.id)
-        db.session.add(new_game)
-        db.session.commit()
-        flash("New game added!", category='success')
-        return redirect(url_for('views.game'))
+            delta1, delta2 = computeElo(player1, player2, winner, type)
+            new_game = Games(type=type, date=datetime.datetime.now().date(), player1=player1.name, player1elo=player1.ranking, player1elodelta=delta1,
+                             player2=player2.name, player2elo=player2.ranking, player2elodelta=delta2, winner=winner)
+            player1.ranking += delta1
+            player2.ranking += delta2
+            player1.gamesplayed += 1
+            player2.gamesplayed += 1
+            #player1.rankingHistory.append(player1.ranking)
+            #player2.rankingHistory.append(player2.ranking)
+            #player1.gamesIds.append(new_game.id)
+            #player2.gamesIds.append(new_game.id)
+            db.session.add(new_game)
+            db.session.commit()
+            flash("New game added!", category='success')
+            return redirect(url_for('views.game'))
     return render_template("new_game.html", user=current_user, players=players_lst)
