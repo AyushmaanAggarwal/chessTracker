@@ -88,7 +88,7 @@ def add_game():
             player2 = Players.query.filter_by(name=player2).first()
 
             delta1, delta2 = computeElo(player1, player2, winner, type)
-            new_game = Games(type=type, date=datetime.datetime.now().date(), player1=player1.name, player1elo=player1.ranking, player1elodelta=delta1,
+            new_game = Games(type=type, date=datetime.datetime.now(), player1=player1.name, player1elo=player1.ranking, player1elodelta=delta1,
                              player2=player2.name, player2elo=player2.ranking, player2elodelta=delta2, winner=winner)
             player1.ranking += delta1
             player2.ranking += delta2
